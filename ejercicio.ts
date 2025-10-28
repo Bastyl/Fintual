@@ -38,21 +38,21 @@ class Portafolio { // Clase Portafolio.
         const portafolioBalance = this.getTotalBalance(); //Se obtiene el balance total que se tiene en el portafolio
 
         this.stocks.forEach(stock => { //Se va a ir trabajando por cada accion individual para ver si se tiene que vender o comprar mas de ella
-            let stockBalance = stock.getValue(); //se obtiene el balance total de la accion
-            let desiredPercent = this.portafolio[stock.symbol]; // obtiene el porcentaje deseado de la accion en el portafolio
+            const stockBalance = stock.getValue(); //se obtiene el balance total de la accion
+            const desiredPercent = this.portafolio[stock.symbol]; // obtiene el porcentaje deseado de la accion en el portafolio
 
             if(!desiredPercent) { //verifica que exista el la accion elegida en el portafolio, si no existe se retorna
                 return
             }
-            let currentPercent = stockBalance * 100/ portafolioBalance; //obtiene el porcentaje actual de la accion en el portafolio
+            const currentPercent = stockBalance * 100/ portafolioBalance; //obtiene el porcentaje actual de la accion en el portafolio
             if(currentPercent > desiredPercent) { //si el porcentaje actual en el portafolio es mayor al del deseado, se debe vender parte de esa accion, se entra al if
-                let valueToSell = portafolioBalance * (currentPercent - desiredPercent) //obtiene el valor a vender en pesos
-                let sharesToSell = valueToSell / stock.getCurrentPrice(); //obtiene la cantidad de acciones a vender
+                const valueToSell = portafolioBalance * (currentPercent - desiredPercent) //obtiene el valor a vender en pesos
+                const sharesToSell = valueToSell / stock.getCurrentPrice(); //obtiene la cantidad de acciones a vender
                 console.log('debes vender ', sharesToSell, 'acciones de ', stock.symbol) //imprime el resultado
             }
             else if(currentPercent < desiredPercent) { //si el porcentaje actual en el portafolio es menor al del deseado, se debe comprar de esa accion, se entra al if
-                let valueToBuy = portafolioBalance * (desiredPercent - currentPercent) //obtiene el valor a comprar en pesos
-                let sharesToBuy = valueToBuy / stock.getCurrentPrice(); //obtiene la cantidad de acciones a comprar
+                const valueToBuy = portafolioBalance * (desiredPercent - currentPercent) //obtiene el valor a comprar en pesos
+                const sharesToBuy = valueToBuy / stock.getCurrentPrice(); //obtiene la cantidad de acciones a comprar
                 console.log('debes comprar ', sharesToBuy, 'acciones de ', stock.symbol) //imprime el resultado
             }
             else { //en caso de que el porcentaje ya este balanceado, no se debe hacer nada con esa accion
